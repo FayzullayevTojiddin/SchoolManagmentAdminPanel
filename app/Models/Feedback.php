@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class Feedback
+ * 
+ * @property int $id
+ * @property int $created_at
+ * @property int $user_id
+ * @property string $question
+ *
+ * @package App\Models
+ */
+class Feedback extends Model
+{
+	protected $table = 'feedback';
+	public $timestamps = false;
+
+	protected $casts = [
+		'user_id' => 'int'
+	];
+
+	protected $fillable = [
+		'user_id',
+		'question'
+	];
+}
