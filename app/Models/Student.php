@@ -65,4 +65,11 @@ class Student extends Model
 	{
 		return $this->hasMany(Paymentstudent::class, 'login_id');
 	}
+
+	protected static function booted(): void
+	{
+		static::creating(function ($model) {
+			$model->created_at = time();
+		});
+	}
 }

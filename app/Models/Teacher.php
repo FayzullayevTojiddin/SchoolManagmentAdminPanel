@@ -71,4 +71,11 @@ class Teacher extends Model
 	{
 		return $this->hasMany(Group::class);
 	}
+
+	protected static function booted(): void
+	{
+		static::creating(function ($model) {
+			$model->created_at = time();
+		});
+	}
 }

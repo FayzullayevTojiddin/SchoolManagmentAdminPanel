@@ -27,43 +27,41 @@ class TelegramUserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-    ->schema([
-        TextInput::make('user_id')
-            ->label('Telegram User ID')
-            ->numeric()
-            ->required()
-            ->unique(ignoreRecord: true),
+            ->schema([
+                TextInput::make('user_id')
+                    ->label('Telegram User ID')
+                    ->numeric()
+                    ->required()
+                    ->unique(ignoreRecord: true),
 
-        TextInput::make('first_name')
-            ->label('Ismi')
-            ->required(),
+                TextInput::make('first_name')
+                    ->label('Ismi')
+                    ->required(),
 
-        TextInput::make('last_name')
-            ->label('Familiyasi')
-            ->nullable(),
+                TextInput::make('last_name')
+                    ->label('Familiyasi')
+                    ->nullable(),
 
-        TextInput::make('username')
-            ->label('Telegram username')
-            ->prefix('@')
-            ->maxLength(100)
-            ->nullable(),
+                TextInput::make('username')
+                    ->label('Telegram username')
+                    ->prefix('@')
+                    ->maxLength(100)
+                    ->nullable(),
 
-        Select::make('role')
-            ->options([
-                'teacher' => "Teacher",
-                'student' => "Student",
-                'admin' => "Admin",
-                'guest' => "None"
-            ])
-
-    ]);
+                Select::make('role')
+                    ->options([
+                        'teacher' => "Teacher",
+                        'student' => "Student",
+                        'admin' => "Admin",
+                        'guest' => "None"
+                    ])
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('first_name'),
                 TextColumn::make('last_name'),
                 TextColumn::make('username'),
@@ -84,7 +82,7 @@ class TelegramUserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            Login::class
+            //
         ];
     }
 
@@ -93,7 +91,7 @@ class TelegramUserResource extends Resource
         return [
             'index' => Pages\ListTelegramUsers::route('/'),
             // 'create' => Pages\CreateTelegramUser::route('/create'),
-            'edit' => Pages\EditTelegramUser::route('/{record}/edit'),
+            // 'edit' => Pages\EditTelegramUser::route('/{record}/edit'),
         ];
     }
 }
