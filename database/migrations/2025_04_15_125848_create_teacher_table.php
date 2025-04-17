@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('teacher', function (Blueprint $table) {
             $table->integer('id', true);
             $table->bigInteger('created_at');
-            $table->bigInteger('user_id')->unique('teacher_user_id');
             $table->string('phone_number', 13);
             $table->string('telegram', 50);
             $table->string('full_name', 100);

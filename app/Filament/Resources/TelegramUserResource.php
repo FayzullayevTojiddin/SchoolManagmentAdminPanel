@@ -3,24 +3,19 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TelegramUserResource\Pages;
-use App\Models\Login;
 use App\Models\TelegramUser;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\DatePicker;
-use Filament\Infolists\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Section as ComponentsSection;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 class TelegramUserResource extends Resource
 {
     protected static ?string $model = TelegramUser::class;
+
+    protected static ?string $navigationGroup = 'Education';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

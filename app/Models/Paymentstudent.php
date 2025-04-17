@@ -41,4 +41,11 @@ class Paymentstudent extends Model
 	{
 		return $this->belongsTo(Student::class, 'login_id');
 	}
+
+	protected static function booted(): void
+	{
+		static::creating(function ($model) {
+			$model->created_at = time();
+		});
+	}
 }

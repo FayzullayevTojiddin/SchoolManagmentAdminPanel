@@ -59,4 +59,11 @@ class Course extends Model
 	{
 		return $this->hasMany(Joincourse::class);
 	}
+
+	protected static function booted(): void
+	{
+		static::creating(function ($model) {
+			$model->created_at = time();
+		});
+	}
 }

@@ -59,4 +59,11 @@ class Login extends Model
 	{
 		return $this->hasMany(TelegramUser::class);
 	}
+
+	protected static function booted(): void
+	{
+		static::creating(function ($model) {
+			$model->created_at = time();
+		});
+	}
 }

@@ -9,7 +9,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BooleanColumn;
 
 class TeacherResource extends Resource
 {
@@ -32,7 +31,6 @@ class TeacherResource extends Resource
                 TextInput::make('achievements'),
                 TextInput::make('feedback'),
                 TextInput::make('description'),
-                TextInput::make('user_id')->numeric(),
                 TextInput::make('login_id')->numeric()->nullable(),
             ]);
     }

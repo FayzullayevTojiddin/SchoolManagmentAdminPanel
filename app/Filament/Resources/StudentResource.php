@@ -4,17 +4,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
 use App\Models\Student;
-use Filament\Forms;
+use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BooleanColumn;
-use Filament\Tables\Columns\DateColumn;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class StudentResource extends Resource
 {
@@ -26,30 +28,69 @@ class StudentResource extends Resource
     protected static ?string $modelLabel = 'Student';
     protected static ?string $navigationGroup = 'Education';
 
-    public static function form(Forms\Form $form): Forms\Form
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('father_name')
-                    ->required()
-                    ->maxLength(255),
-                DatePicker::make('birthday')
-                    ->required(),
-                Textarea::make('description')
-                    ->maxLength(65535),
-                Select::make('login_id')
-                    ->relationship('login', 'username') // Assuming Login has 'username'
-                    ->searchable()
-                    ->nullable(),
-                Toggle::make('status')
-                    ->label('Is Active')
-                    ->default(true),
+                Section::make('Student about')
+                    ->schema([
+                        TextInput::make('first_name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('last_name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('father_name')
+                            ->required()
+                            ->maxLength(255),
+                        DatePicker::make('birthday')
+                            ->required(),
+                        Textarea::make('description')
+                            ->maxLength(65535),
+                        Toggle::make('status')
+                            ->label('Is Active')
+                            ->default(true),
+                    ])
+                    ->collapsible(),
+
+                Section::make("Login Section")
+                    ->schema([
+                        BelongsToSelect::make('login_id')
+                            ->relationship('login', 'login')
+                            ->searchable()
+                            ->preload()
+                            ->label('Login')
+                            ->required()
+                            ->createOptionForm([
+                                TextInput::make('login')
+                                    ->required()
+                                    ->unique(ignoreRecord: true),
+                                TextInput::make('password')
+                                    ->password()
+                                    ->required()
+                                    ->minLength(6),
+                            ]),
+                        ]),
+
+                Section::make('Groups')
+                    ->schema([
+                    ]),
+
+                Section::make('Payments Section')
+                    ->schema([
+                        Repeater::make('paymentstudents')
+                        ->relationship()
+                        ->schema([
+                            TextInput::make('price')
+                                ->numeric()
+                                ->required(),
+                            Textarea::make('description'),
+                        ])
+                        ->label('Payments')
+                        ->columns(2)
+                    ])
+                    ->persistCollapsed()
+                    ->collapsible()
             ]);
     }
 
@@ -87,8 +128,8 @@ class StudentResource extends Resource
     {
         return [
             'index' => Pages\ListStudents::route('/'),
-            // 'create' => Pages\CreateStudent::route('/create'),
-            // 'edit' => Pages\EditStudent::route('/{record}/edit'),
+            'create' => Pages\CreateStudent::route('/create'),
+            'edit' => Pages\EditStudent::route('/{record}/edit'),
         ];
     }
 }

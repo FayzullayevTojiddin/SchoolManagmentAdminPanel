@@ -5,7 +5,6 @@ use App\Filament\Resources\GroupResource\Pages;
 use App\Models\Group;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -17,7 +16,7 @@ class GroupResource extends Resource
 
     protected static ?string $navigationGroup = 'Education';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationLabel = 'Groups';
 
@@ -31,7 +30,7 @@ class GroupResource extends Resource
                     ->searchable(),
 
                 Select::make('course_id')
-                    ->relationship('course', 'title')
+                    ->relationship('course', 'name')
                     ->required()
                     ->searchable(),
 
@@ -41,7 +40,7 @@ class GroupResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
