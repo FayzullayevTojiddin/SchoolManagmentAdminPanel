@@ -2,9 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ClassResource\RelationManagers\GroupsRelationManager;
 use App\Filament\Resources\CourseResource\Pages;
+use App\Filament\Resources\CourseResource\RelationManagers\JoincoursesRelationManager;
+use App\Filament\Resources\CourseResource\RelationManagers\StudentsRelationManager;
+use App\Filament\Resources\CourseResource\RelationManagers\TeachersRelationManager;
 use App\Models\Course;
-use Filament\Forms\Components\{TextInput, Textarea, Toggle};
+use Filament\Forms\Components\{Repeater, Section, TextInput, Textarea, Toggle};
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
@@ -24,29 +28,32 @@ class CourseResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Course Name')
-                    ->required()
-                    ->unique(ignoreRecord: true),
+                Section::make('Course datas')
+                ->schema([
+                        TextInput::make('name')
+                        ->label('Course Name')
+                        ->required()
+                        ->unique(ignoreRecord: true),
 
-                Textarea::make('description')
-                    ->label('Description')
-                    ->required()
-                    ->rows(5),
+                    Textarea::make('description')
+                        ->label('Description')
+                        ->required()
+                        ->rows(5),
 
-                TextInput::make('price')
-                    ->label('Price')
-                    ->numeric()
-                    ->required(),
+                    TextInput::make('price')
+                        ->label('Price')
+                        ->numeric()
+                        ->required(),
 
-                TextInput::make('duration')
-                    ->label('Duration')
-                    ->placeholder('e.g. 6 weeks, 2 months')
-                    ->required(),
+                    TextInput::make('duration')
+                        ->label('Duration')
+                        ->placeholder('e.g. 6 weeks, 2 months')
+                        ->required(),
 
-                Toggle::make('status')
-                    ->label('Active Status')
-                    ->inline(false),
+                    Toggle::make('status')
+                        ->label('Active Status')
+                        ->inline(false),
+                ])->columns(1),
             ]);
     }
 
@@ -62,6 +69,15 @@ class CourseResource extends Resource
                     ->label('Active'),
             ])
             ->defaultSort('id', 'desc');
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            GroupsRelationManager::class,
+            JoincoursesRelationManager::class,
+            TeachersRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

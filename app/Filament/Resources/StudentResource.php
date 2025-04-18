@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ClassResource\RelationManagers\GroupsRelationManager;
 use App\Filament\Resources\StudentResource\Pages;
+use App\Filament\Resources\StudentResource\RelationManagers\PaymentstudentsRelationManager;
 use App\Models\Student;
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Form;
@@ -76,21 +78,21 @@ class StudentResource extends Resource
                     ->schema([
                     ]),
 
-                Section::make('Payments Section')
-                    ->schema([
-                        Repeater::make('paymentstudents')
-                        ->relationship()
-                        ->schema([
-                            TextInput::make('price')
-                                ->numeric()
-                                ->required(),
-                            Textarea::make('description'),
-                        ])
-                        ->label('Payments')
-                        ->columns(2)
-                    ])
-                    ->persistCollapsed()
-                    ->collapsible()
+                // Section::make('Payments Section')
+                //     ->schema([
+                //         Repeater::make('paymentstudents')
+                //         ->relationship()
+                //         ->schema([
+                //             TextInput::make('price')
+                //                 ->numeric()
+                //                 ->required(),
+                //             Textarea::make('description'),
+                //         ])
+                //         ->label('Payments')
+                //         ->columns(2)
+                //     ])
+                //     ->persistCollapsed()
+                //     ->collapsible()
             ]);
     }
 
@@ -120,7 +122,8 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // Add relation managers if needed
+            PaymentstudentsRelationManager::class,
+            GroupsRelationManager::class,
         ];
     }
 

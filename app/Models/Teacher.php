@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property int $created_at
- * @property int $user_id
  * @property string $phone_number
  * @property string $telegram
  * @property string $full_name
@@ -38,12 +37,10 @@ class Teacher extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'user_id' => 'int',
 		'login_id' => 'int'
 	];
 
 	protected $fillable = [
-		'user_id',
 		'phone_number',
 		'telegram',
 		'full_name',
