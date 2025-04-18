@@ -58,7 +58,7 @@ class Group extends Model
 					->withPivot('id');
 	}
 
-	public function homework()
+	public function homeworks()
 	{
 		return $this->hasMany(Homework::class);
 	}

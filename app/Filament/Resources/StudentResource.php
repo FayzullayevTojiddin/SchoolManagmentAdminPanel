@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClassResource\RelationManagers\GroupsRelationManager;
+use App\Filament\Resources\GroupResource\RelationManagers\MaterialsRelationManager;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers\PaymentstudentsRelationManager;
 use App\Models\Student;
@@ -73,26 +74,6 @@ class StudentResource extends Resource
                                     ->minLength(6),
                             ]),
                         ]),
-
-                Section::make('Groups')
-                    ->schema([
-                    ]),
-
-                // Section::make('Payments Section')
-                //     ->schema([
-                //         Repeater::make('paymentstudents')
-                //         ->relationship()
-                //         ->schema([
-                //             TextInput::make('price')
-                //                 ->numeric()
-                //                 ->required(),
-                //             Textarea::make('description'),
-                //         ])
-                //         ->label('Payments')
-                //         ->columns(2)
-                //     ])
-                //     ->persistCollapsed()
-                //     ->collapsible()
             ]);
     }
 

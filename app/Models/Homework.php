@@ -43,4 +43,12 @@ class Homework extends Model
 	{
 		return $this->belongsTo(Group::class);
 	}
+
+	protected static function booted(): void
+	{
+		static::creating(function ($model) {
+			$model->created_at = time();
+			$model->completed = false;
+		});
+	}
 }

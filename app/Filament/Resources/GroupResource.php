@@ -1,7 +1,10 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CourseResource\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\GroupResource\Pages;
+use App\Filament\Resources\GroupResource\RelationManagers\HomeworksRelationManager;
+use App\Filament\Resources\GroupResource\RelationManagers\MaterialsRelationManager;
 use App\Models\Group;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -46,7 +49,7 @@ class GroupResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('teacher.full_name')->label('Teacher'),
-                TextColumn::make('course.title')->label('Course'),
+                TextColumn::make('course.name')->label('Course'),
             ])
             ->filters([])
             ->actions([
@@ -56,6 +59,15 @@ class GroupResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            StudentsRelationManager::class,
+            HomeworksRelationManager::class,
+            MaterialsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

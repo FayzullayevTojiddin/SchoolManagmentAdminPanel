@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\CourseResource\RelationManagers;
+namespace App\Filament\Resources\GroupResource\RelationManagers;
 
-use App\Models\Student;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -20,27 +18,18 @@ class StudentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Select::make('student_id')
-                    ->label('Student')
-                    ->searchable()
-                    ->getSearchResultsUsing(fn (string $search) =>
-                        Student::where('first_name', 'like', "%{$search}%")
-                            ->whereNotNull('first_name')
-                            ->limit(50)
-                            ->pluck('first_name', 'id')
-                    )
-                    ->getOptionLabelUsing(fn ($value) => Student::find($value)?->first_name ?? 'Noma’lum')
-                    ->required(),
+                Forms\Components\TextInput::make('first_name')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('Name')
+            ->recordTitleAttribute('first_name')
             ->columns([
                 Tables\Columns\TextColumn::make('first_name'),
-                Tables\Columns\TextColumn::make('last_name'),
             ])
             ->filters([
                 //
@@ -49,6 +38,7 @@ class StudentsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
