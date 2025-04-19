@@ -5,6 +5,7 @@ namespace App\Filament\Resources\GroupResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -26,7 +27,10 @@ class HomeworksRelationManager extends RelationManager
                 Textarea::make('description')
                     ->required()
                     ->placeholder('Uyga vazifaning tavsifini kiriting. ')
-                    ->maxLength(1000)
+                    ->maxLength(1000),
+                Toggle::make('completed')
+                    ->label('Is Active')
+                    ->default(false),
             ])->columns(1);
     }
 

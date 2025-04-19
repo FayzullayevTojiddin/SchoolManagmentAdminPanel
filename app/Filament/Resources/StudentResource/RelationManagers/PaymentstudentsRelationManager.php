@@ -5,6 +5,7 @@ namespace App\Filament\Resources\StudentResource\RelationManagers;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -25,7 +26,11 @@ class PaymentstudentsRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255)
                     ->numeric(),
-                
+                    
+                Textarea::make('description')
+                    ->required()
+                    ->maxLength(1000),
+
                 DatePicker::make('created_at')
                     ->required()
             ]);

@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\GroupResource\RelationManagers;
 
+use App\Models\Student;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -18,18 +20,20 @@ class StudentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('first_name')
+                Select::make('student_id')
+                    ->relationship('student', 'first_name')
+                    ->searchable()
+                    ->preload()
                     ->required()
-                    ->maxLength(255),
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('first_name')
+            ->recordTitleAttribute('student.first_name')
             ->columns([
-                Tables\Columns\TextColumn::make('first_name'),
+                Tables\Columns\TextColumn::make('student.first_name'),
             ])
             ->filters([
                 //
@@ -38,7 +42,7 @@ class StudentsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

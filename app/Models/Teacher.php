@@ -61,8 +61,7 @@ class Teacher extends Model
 
 	public function courses()
 	{
-		return $this->belongsToMany(Course::class, 'courseteacher')
-					->withPivot('id');
+		return $this->hasMany(Courseteacher::class);
 	}
 
 	public function groups()

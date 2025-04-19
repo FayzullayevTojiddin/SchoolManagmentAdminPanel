@@ -3,8 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeacherResource\Pages;
+use App\Filament\Resources\TeacherResource\RelationManagers\CoursesRelationManager;
+use App\Models\Login;
 use App\Models\Teacher;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,13 +30,30 @@ class TeacherResource extends Resource
                 TextInput::make('phone_number')->required()->tel(),
                 TextInput::make('telegram')->required()->maxLength(255),
                 TextInput::make('subject')->required(),
-                TextInput::make('experience'),
-                TextInput::make('school'),
-                TextInput::make('achievements'),
-                TextInput::make('feedback'),
-                TextInput::make('description'),
-                TextInput::make('login_id')->numeric()->nullable(),
+                Section::make('Teacher addional')
+                    ->schema([
+                        TextInput::make('experience'),
+                        TextInput::make('school'),
+                        TextInput::make('achievements'),
+                        TextInput::make('feedback'),
+                        TextInput::make('description'),
+                    ])
+                    ->collapsed(),
+                Section::make('login_id')
+                    ->schema([
+                        Select::make('login_id')
+                            ->relationship('login', 'login')
+                            ->searchable()
+                            ->preload(false)
+                    ])
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            CoursesRelationManager::class
+        ];
     }
 
     public static function table(Tables\Table $table): Tables\Table

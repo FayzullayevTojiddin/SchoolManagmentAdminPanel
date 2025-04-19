@@ -5,6 +5,7 @@ use App\Filament\Resources\CourseResource\RelationManagers\StudentsRelationManag
 use App\Filament\Resources\GroupResource\Pages;
 use App\Filament\Resources\GroupResource\RelationManagers\HomeworksRelationManager;
 use App\Filament\Resources\GroupResource\RelationManagers\MaterialsRelationManager;
+use App\Filament\Resources\GroupResource\RelationManagers\StudentsRelationManager as RelationManagersStudentsRelationManager;
 use App\Models\Group;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -64,7 +65,7 @@ class GroupResource extends Resource
     public static function getRelations(): array
     {
         return [
-            StudentsRelationManager::class,
+            RelationManagersStudentsRelationManager::class,
             HomeworksRelationManager::class,
             MaterialsRelationManager::class,
         ];

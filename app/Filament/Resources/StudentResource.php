@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClassResource\RelationManagers\GroupsRelationManager;
-use App\Filament\Resources\GroupResource\RelationManagers\MaterialsRelationManager;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers\PaymentstudentsRelationManager;
 use App\Models\Student;
@@ -13,13 +12,12 @@ use Filament\Tables;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BooleanColumn;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class StudentResource extends Resource
 {
@@ -72,6 +70,14 @@ class StudentResource extends Resource
                                     ->password()
                                     ->required()
                                     ->minLength(6),
+                                Select::make('role')
+                                    ->required()
+                                    ->options([
+                                        'student' => "Student",
+                                        'teacher' => "Teacher",
+                                        'admin' => "Admin",
+                                        'guest' => "None"
+                                    ])
                             ]),
                         ]),
             ]);
