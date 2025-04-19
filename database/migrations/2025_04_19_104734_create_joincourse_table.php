@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paymentstudent', function (Blueprint $table) {
+        Schema::create('joincourse', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
-            $table->integer('login_id')->nullable()->index('paymentstudent_login_id');
-            $table->integer('price');
-            $table->text('description')->nullable();
+            $table->dateTime('created_at')->useCurrent();
+            $table->bigInteger('user_id')->index('joincourse_user_id');
+            $table->integer('course_id')->index('joincourse_course_id');
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paymentstudent');
+        Schema::dropIfExists('joincourse');
     }
 };

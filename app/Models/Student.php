@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Student
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property string $first_name
  * @property string $last_name
  * @property string $father_name
@@ -64,12 +64,5 @@ class Student extends Model
 	public function paymentstudents()
 	{
 		return $this->hasMany(Paymentstudent::class, 'login_id');
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
 	}
 }

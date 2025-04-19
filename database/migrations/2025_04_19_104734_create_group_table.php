@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('group', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
+            $table->dateTime('created_at')->useCurrent();
             $table->integer('teacher_id')->nullable()->index('group_teacher_id');
             $table->integer('course_id')->nullable()->index('group_course_id');
             $table->string('name', 100)->unique('group_name');

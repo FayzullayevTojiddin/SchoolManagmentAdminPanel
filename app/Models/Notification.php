@@ -6,13 +6,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Notification
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int $from_in_id
  * @property int $to_id
  * @property string $message

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('homework', function (Blueprint $table) {
+        Schema::create('course', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
-            $table->integer('group_id')->index('homework_group_id');
-            $table->boolean('completed');
-            $table->string('title', 100);
-            $table->text('description')->nullable();
+            $table->dateTime('created_at')->useCurrent();
+            $table->string('name')->unique('course_name');
+            $table->text('description');
+            $table->integer('price');
+            $table->string('duration');
+            $table->boolean('status');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('homework');
+        Schema::dropIfExists('course');
     }
 };

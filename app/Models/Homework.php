@@ -6,13 +6,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Homework
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int $group_id
  * @property bool $completed
  * @property string $title
@@ -42,13 +43,5 @@ class Homework extends Model
 	public function group()
 	{
 		return $this->belongsTo(Group::class);
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-			$model->completed = false;
-		});
 	}
 }

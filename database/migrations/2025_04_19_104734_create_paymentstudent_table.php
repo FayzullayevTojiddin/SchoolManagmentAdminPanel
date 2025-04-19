@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('material', function (Blueprint $table) {
+        Schema::create('paymentstudent', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
-            $table->string('name');
-            $table->string('path', 100)->unique('material_path');
-            $table->string('type');
-            $table->integer('group_id')->index('material_group_id');
+            $table->dateTime('created_at')->useCurrent();
+            $table->integer('login_id')->nullable()->index('paymentstudent_login_id');
+            $table->integer('price');
+            $table->text('description')->nullable();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('material');
+        Schema::dropIfExists('paymentstudent');
     }
 };

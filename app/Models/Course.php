@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Course
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property string $name
  * @property string $description
  * @property int $price
@@ -46,8 +47,7 @@ class Course extends Model
 
 	public function teachers()
 	{
-		return $this->belongsToMany(Teacher::class, 'courseteacher')
-					->withPivot('id');
+		return $this->hasMany(Courseteacher::class);
 	}
 
 	public function groups()
@@ -58,12 +58,5 @@ class Course extends Model
 	public function joincourses()
 	{
 		return $this->hasMany(Joincourse::class);
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
 	}
 }

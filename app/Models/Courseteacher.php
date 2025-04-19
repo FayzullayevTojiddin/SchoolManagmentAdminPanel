@@ -6,13 +6,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Courseteacher
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int $course_id
  * @property int $teacher_id
  * 

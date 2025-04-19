@@ -33,8 +33,7 @@ class Groupstudent extends Model
 
 	protected $fillable = [
 		'student_id',
-		'group_id',
-		'created_at'
+		'group_id'
 	];
 
 	public function student()
@@ -45,12 +44,5 @@ class Groupstudent extends Model
 	public function group()
 	{
 		return $this->belongsTo(Group::class);
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
 	}
 }

@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class TelegramUser
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int $user_id
  * @property string $first_name
  * @property string|null $last_name
@@ -54,12 +55,4 @@ class TelegramUser extends Model
 	{
 		return $this->hasMany(Joincourse::class, 'user_id', 'user_id');
 	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
-	}
-
 }

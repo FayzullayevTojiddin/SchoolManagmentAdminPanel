@@ -6,13 +6,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Joincourse
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int $user_id
  * @property int $course_id
  * 

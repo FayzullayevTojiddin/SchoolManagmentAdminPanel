@@ -6,13 +6,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Paymentstudent
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int|null $login_id
  * @property int $price
  * @property string|null $description
@@ -40,12 +41,5 @@ class Paymentstudent extends Model
 	public function student()
 	{
 		return $this->belongsTo(Student::class, 'login_id');
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
 	}
 }

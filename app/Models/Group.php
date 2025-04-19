@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Group
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property int|null $teacher_id
  * @property int|null $course_id
  * @property string $name
@@ -66,12 +67,5 @@ class Group extends Model
 	public function materials()
 	{
 		return $this->hasMany(Material::class);
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
 	}
 }

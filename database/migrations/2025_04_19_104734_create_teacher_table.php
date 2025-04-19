@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('teacher', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
+            $table->dateTime('created_at')->useCurrent();
             $table->string('phone_number', 13);
             $table->string('telegram', 50);
             $table->string('full_name', 100);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('telegram_user', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
+            $table->dateTime('created_at')->useCurrent();
             $table->bigInteger('user_id')->unique('user_user_id');
             $table->string('first_name');
             $table->string('last_name')->nullable();

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('homework', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
-            $table->bigInteger('user_id');
-            $table->string('question', 1000);
+            $table->dateTime('created_at')->useCurrent();
+            $table->integer('group_id')->index('homework_group_id');
+            $table->boolean('completed');
+            $table->string('title', 100);
+            $table->text('description')->nullable();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('homework');
     }
 };

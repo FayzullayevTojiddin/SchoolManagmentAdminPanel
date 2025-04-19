@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('joincourse', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
-            $table->bigInteger('user_id')->index('joincourse_user_id');
-            $table->integer('course_id')->index('joincourse_course_id');
+            $table->dateTime('created_at')->useCurrent();
+            $table->bigInteger('user_id');
+            $table->string('question', 1000);
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('joincourse');
+        Schema::dropIfExists('feedback');
     }
 };

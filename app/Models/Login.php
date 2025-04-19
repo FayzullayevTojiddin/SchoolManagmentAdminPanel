@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Login
  * 
  * @property int $id
- * @property int $created_at
+ * @property Carbon $created_at
  * @property string $login
  * @property string $password
  * @property string $role
@@ -58,12 +59,5 @@ class Login extends Model
 	public function telegram_users()
 	{
 		return $this->hasMany(TelegramUser::class);
-	}
-
-	protected static function booted(): void
-	{
-		static::creating(function ($model) {
-			$model->created_at = time();
-		});
 	}
 }

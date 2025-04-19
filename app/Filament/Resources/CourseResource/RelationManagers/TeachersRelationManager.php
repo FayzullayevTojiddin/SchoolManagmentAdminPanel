@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\CourseResource\RelationManagers;
 
+use App\Models\Teacher;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeachersRelationManager extends RelationManager
 {
@@ -19,27 +19,30 @@ class TeachersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('full_name')
+                Select::make('teacher_id')
+                    ->relationship('teacher', 'full_name')
+                    ->preload()
                     ->required()
-                    ->maxLength(255),
+                    ->searchable()
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('full_name')
+            ->recordTitleAttribute('teacher.full_name')
             ->columns([
-                Tables\Columns\TextColumn::make('full_name'),
-                TextColumn::make('subject'),
-                TextColumn::make('school')
+                Tables\Columns\TextColumn::make('teacher.full_name'),
+                TextColumn::make('teacher.subject'),
+                TextColumn::make('teacher.school')
             ])
             ->searchable()
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->label('O‘qituvchini biriktirish'),
             ])
             ->actions([
                 Tables\Actions\DeleteAction::make(),

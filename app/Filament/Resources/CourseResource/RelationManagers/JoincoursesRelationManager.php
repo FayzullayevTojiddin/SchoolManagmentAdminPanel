@@ -20,9 +20,7 @@ class JoincoursesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('telegram_user')
-                    ->required()
-                    ->maxLength(255),
+                //
             ]);
     }
 
@@ -35,13 +33,12 @@ class JoincoursesRelationManager extends RelationManager
                     ->label('Foydalanuvchi'),
                 TextColumn::make('created_at')
                     ->label('Created At')
-                    ->formatStateUsing(fn ($state) => Carbon::createFromTimestamp($state)->format('Y-m-d H:i'))
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('courseteacher', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->bigInteger('created_at');
+            $table->dateTime('created_at')->useCurrent();
             $table->integer('course_id')->index('courseteacher_course_id');
             $table->integer('teacher_id')->index('courseteacher_teacher_id');
         });
