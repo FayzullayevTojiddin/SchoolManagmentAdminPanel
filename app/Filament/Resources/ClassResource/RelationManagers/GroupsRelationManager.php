@@ -2,17 +2,11 @@
 
 namespace App\Filament\Resources\ClassResource\RelationManagers;
 
-use App\Models\Teacher;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Notifications\Collection;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GroupsRelationManager extends RelationManager
 {
@@ -32,7 +26,7 @@ class GroupsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('group.name'),
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //
