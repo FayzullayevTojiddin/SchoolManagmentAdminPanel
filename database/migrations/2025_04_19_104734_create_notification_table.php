@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notification', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
-            $table->integer('from_in_id')->index('notification_from_in_id');
-            $table->integer('to_id')->index('notification_to_id');
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('from_in_id')->constrained('logins')->cascadeOnDelete();
+            $table->foreignId('to_id')->constrained('logins')->cascadeOnDelete();
             $table->text('message');
             $table->boolean('hidden');
             $table->boolean('read');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notification');
+        Schema::dropIfExists('notifications');
     }
 };

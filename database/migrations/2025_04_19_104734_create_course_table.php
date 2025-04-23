@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
-            $table->string('name')->unique('course_name');
-            $table->text('description');
+        Schema::create('courses', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
             $table->integer('price');
             $table->string('duration');
             $table->boolean('status');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course');
+        Schema::dropIfExists('courses');
     }
 };

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teacher', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->id();
             $table->string('phone_number', 13);
             $table->string('telegram', 50);
             $table->string('full_name', 100);
@@ -23,7 +22,8 @@ return new class extends Migration
             $table->string('achievements', 200);
             $table->string('feedback', 100);
             $table->string('description', 1000);
-            $table->integer('login_id')->nullable()->index('teacher_login_id');
+            $table->foreignId('login_id')->nullable()->constrained()->nullOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teacher');
+        Schema::dropIfExists('teachers');
     }
 };

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\GroupResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -19,6 +20,13 @@ class MaterialsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('path')
+                    ->required()
+                    ->maxLength(255)
+                    ->url(),
+                TextInput::make('type')
                     ->required()
                     ->maxLength(255),
             ]);

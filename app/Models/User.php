@@ -11,15 +11,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return match ($panel->getId()) {
-            'admin' => $this->role === 'admin',
-            'teacher' => $this->role === 'teacher',
-            default => false,
-        };
-    }
-
     /**
      * The attributes that are mass assignable.
      *

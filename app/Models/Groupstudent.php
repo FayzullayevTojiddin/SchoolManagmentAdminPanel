@@ -23,9 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Groupstudent extends Model
 {
-	protected $table = 'groupstudent';
-	public $timestamps = false;
-
 	protected $casts = [
 		'student_id' => 'int',
 		'group_id' => 'int'

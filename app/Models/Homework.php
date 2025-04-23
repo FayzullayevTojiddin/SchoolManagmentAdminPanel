@@ -25,9 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Homework extends Model
 {
-	protected $table = 'homework';
-	public $timestamps = false;
-
+	protected $table = 'homeworks';
+	
 	protected $casts = [
 		'group_id' => 'int',
 		'completed' => 'bool'

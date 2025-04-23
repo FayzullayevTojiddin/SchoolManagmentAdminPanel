@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
+        Schema::create('feedbacks', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('user_id');
             $table->string('question', 1000);
+            $table->timestamps();
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('feedbacks');
     }
 };

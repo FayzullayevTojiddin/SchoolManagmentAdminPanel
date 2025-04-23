@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('material', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
+        Schema::create('materials', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->string('path', 100)->unique('material_path');
+            $table->string('path', 100);
             $table->string('type');
-            $table->integer('group_id')->index('material_group_id');
+            $table->foreignId('group_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('material');
+        Schema::dropIfExists('materials');
     }
 };

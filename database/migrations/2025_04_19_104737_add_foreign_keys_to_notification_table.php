@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notification', function (Blueprint $table) {
-            $table->foreign(['from_in_id'], 'notification_ibfk_1')->references(['id'])->on('login')->onUpdate('no action')->onDelete('cascade');
-            $table->foreign(['to_id'], 'notification_ibfk_2')->references(['id'])->on('login')->onUpdate('no action')->onDelete('cascade');
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->foreign(['from_in_id'], 'notifications_ibfk_1')->onUpdate('no action')->onDelete('cascade');
+            $table->foreign(['to_id'], 'notifications_ibfk_2')->onUpdate('no action')->onDelete('cascade');
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notification', function (Blueprint $table) {
-            $table->dropForeign('notification_ibfk_1');
-            $table->dropForeign('notification_ibfk_2');
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->dropForeign('notifications_ibfk_1');
+            $table->dropForeign('notifications_ibfk_2');
         });
     }
 };

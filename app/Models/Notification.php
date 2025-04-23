@@ -26,9 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notification extends Model
 {
-	protected $table = 'notification';
-	public $timestamps = false;
-
 	protected $casts = [
 		'from_in_id' => 'int',
 		'to_id' => 'int',

@@ -2,10 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ClassResource\RelationManagers\GroupsRelationManager;
 use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers\JoincoursesRelationManager;
-use App\Filament\Resources\CourseResource\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\CourseResource\RelationManagers\TeachersRelationManager;
 use App\Models\Course;
 use Filament\Forms\Components\{Repeater, Section, TextInput, Textarea, Toggle};
@@ -74,9 +72,9 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            GroupsRelationManager::class,
             JoincoursesRelationManager::class,
             TeachersRelationManager::class,
+            \App\Filament\Resources\CourseResource\RelationManagers\GroupsRelationManager::class
         ];
     }
 

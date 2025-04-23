@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('telegram_user', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
+        Schema::create('telegram_users', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('user_id')->unique('user_user_id');
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('username', 100)->nullable();
             $table->string('role', 10);
-            $table->integer('login_id')->nullable()->index('user_login_id');
+            $table->foreignId('login_id')->nullable()->constrained()->nullOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('telegram_user');
+        Schema::dropIfExists('telegram_users');
     }
 };

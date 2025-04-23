@@ -24,9 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Courseteacher extends Model
 {
-	protected $table = 'courseteacher';
-	public $timestamps = false;
-
 	protected $casts = [
 		'course_id' => 'int',
 		'teacher_id' => 'int'

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('joincourse', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
+        Schema::create('joincourses', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('user_id')->index('joincourse_user_id');
-            $table->integer('course_id')->index('joincourse_course_id');
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('joincourse');
+        Schema::dropIfExists('joincourses');
     }
 };

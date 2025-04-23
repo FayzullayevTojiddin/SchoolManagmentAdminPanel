@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('group', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
-            $table->integer('teacher_id')->nullable()->index('group_teacher_id');
-            $table->integer('course_id')->nullable()->index('group_course_id');
-            $table->string('name', 100)->unique('group_name');
+        Schema::create('groups', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('teacher_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('course_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('name', 100)->unique();
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('group');
+        Schema::dropIfExists('groups');
     }
 };

@@ -31,9 +31,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Student extends Model
 {
-	protected $table = 'student';
-	public $timestamps = false;
-
 	protected $casts = [
 		'birthday' => 'datetime',
 		'login_id' => 'int',

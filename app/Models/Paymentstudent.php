@@ -24,9 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Paymentstudent extends Model
 {
-	protected $table = 'paymentstudent';
-	public $timestamps = false;
-
 	protected $casts = [
 		'login_id' => 'int',
 		'price' => 'int'

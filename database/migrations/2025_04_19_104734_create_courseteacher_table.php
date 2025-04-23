@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courseteacher', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->dateTime('created_at')->useCurrent();
-            $table->integer('course_id')->index('courseteacher_course_id');
-            $table->integer('teacher_id')->index('courseteacher_teacher_id');
+        Schema::create('courseteachers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courseteacher');
+        Schema::dropIfExists('courseteachers');
     }
 };

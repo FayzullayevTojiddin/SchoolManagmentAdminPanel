@@ -24,9 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Joincourse extends Model
 {
-	protected $table = 'joincourse';
-	public $timestamps = false;
-
 	protected $casts = [
 		'user_id' => 'int',
 		'course_id' => 'int'

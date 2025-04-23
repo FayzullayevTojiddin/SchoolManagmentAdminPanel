@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('student', function (Blueprint $table) {
-            $table->foreign(['login_id'], 'student_ibfk_1')->references(['id'])->on('login')->onUpdate('no action')->onDelete('set null');
+        Schema::create('logins', function (Blueprint $table) {
+            $table->id();
+            $table->string('login', 30)->unique();
+            $table->string('password', 50);
+            $table->string('role', 10);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('student', function (Blueprint $table) {
-            $table->dropForeign('student_ibfk_1');
-        });
+        Schema::dropIfExists('logins');
     }
 };

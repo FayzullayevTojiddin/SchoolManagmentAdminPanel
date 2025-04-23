@@ -29,9 +29,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TelegramUser extends Model
 {
-	protected $table = 'telegram_user';
-	public $timestamps = false;
-
 	protected $casts = [
 		'user_id' => 'int',
 		'login_id' => 'int'

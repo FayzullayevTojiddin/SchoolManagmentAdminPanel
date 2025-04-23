@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ClassResource\RelationManagers\GroupsRelationManager;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers\PaymentstudentsRelationManager;
 use App\Models\Student;
@@ -110,7 +109,6 @@ class StudentResource extends Resource
     {
         return [
             PaymentstudentsRelationManager::class,
-            GroupsRelationManager::class,
         ];
     }
 
