@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\StudentResource\RelationManagers;
+namespace App\Filament\Teacher\Resources\GroupResource\RelationManagers;
 
-use Carbon\Carbon;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -14,27 +12,24 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PaymentstudentsRelationManager extends RelationManager
+class MaterialsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'paymentstudents';
-
-    protected static ?string $title = "To'lovlar";
+    protected static string $relationship = 'materials';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('price')
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('path')
                     ->required()
                     ->maxLength(255)
-                    ->numeric(),
-                    
-                Textarea::make('description')
+                    ->url(),
+                TextInput::make('type')
                     ->required()
-                    ->maxLength(1000),
-
-                DatePicker::make('created_at')
-                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -43,9 +38,8 @@ class PaymentstudentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('price')->label('Miqdori'),
-                TextColumn::make('created_at')
-                    ->label("To'langan vaqti")
+                Tables\Columns\TextColumn::make('name'),
+                TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
                 //

@@ -32,11 +32,11 @@ class TeacherResource extends Resource
                 TextInput::make('subject')->required(),
                 Section::make('Teacher addional')
                     ->schema([
-                        TextInput::make('experience'),
-                        TextInput::make('school'),
-                        TextInput::make('achievements'),
-                        TextInput::make('feedback'),
-                        TextInput::make('description'),
+                        TextInput::make('experience')->required(),
+                        TextInput::make('school')->required(),
+                        TextInput::make('achievements')->required(),
+                        TextInput::make('feedback')->required(),
+                        TextInput::make('description')->required(),
                     ])
                     ->collapsed(),
                 Section::make('login_id')
@@ -52,7 +52,8 @@ class TeacherResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CoursesRelationManager::class
+            CoursesRelationManager::class,
+            \App\Filament\Resources\TeacherResource\RelationManagers\GroupsRelationManager::class
         ];
     }
 

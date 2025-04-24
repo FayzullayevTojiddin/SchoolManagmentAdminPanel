@@ -1,51 +1,48 @@
 <?php
 
-namespace App\Filament\Resources\StudentResource\RelationManagers;
+namespace App\Filament\Teacher\Resources\GroupResource\RelationManagers;
 
-use Carbon\Carbon;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PaymentstudentsRelationManager extends RelationManager
+class HomeworksRelationManager extends RelationManager
 {
-    protected static string $relationship = 'paymentstudents';
-
-    protected static ?string $title = "To'lovlar";
+    protected static string $relationship = 'homeworks';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('price')
+                Forms\Components\TextInput::make('title')
                     ->required()
-                    ->maxLength(255)
-                    ->numeric(),
-                    
+                    ->maxLength(255),
                 Textarea::make('description')
                     ->required()
+                    ->placeholder('Uyga vazifaning tavsifini kiriting. ')
                     ->maxLength(1000),
-
-                DatePicker::make('created_at')
-                    ->required()
-            ]);
+                Toggle::make('completed')
+                    ->label('Is Active')
+                    ->default(false),
+            ])->columns(1);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
+            ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('price')->label('Miqdori'),
-                TextColumn::make('created_at')
-                    ->label("To'langan vaqti")
+                Tables\Columns\TextColumn::make('title'),
+                IconColumn::make('completed')
+                    ->boolean()
+                    ->label("Bajarilgan"),
             ])
             ->filters([
                 //

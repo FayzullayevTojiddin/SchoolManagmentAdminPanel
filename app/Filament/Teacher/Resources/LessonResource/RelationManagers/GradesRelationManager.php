@@ -1,48 +1,46 @@
 <?php
 
-namespace App\Filament\Resources\CourseResource\RelationManagers;
+namespace App\Filament\Teacher\Resources\LessonResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class GroupsRelationManager extends RelationManager
+class GradesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'groups';
-
-    protected static ?string $title = "Guruhlar";
+    protected static string $relationship = 'grades';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('score'),
+                TextInput::make('comment')
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('group')
+            ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('Guruh nomi'),
-                TextColumn::make('created_at')->label('Yaratilingan vaqti')->date()
+                Tables\Columns\TextColumn::make('student.first_name'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Yangi guruh yaratish'),
+                // Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

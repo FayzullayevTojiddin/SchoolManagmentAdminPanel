@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CourseResource\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\GroupResource\Pages;
 use App\Filament\Resources\GroupResource\RelationManagers\HomeworksRelationManager;
+use App\Filament\Resources\GroupResource\RelationManagers\LessonsRelationManager;
 use App\Filament\Resources\GroupResource\RelationManagers\MaterialsRelationManager;
 use App\Filament\Resources\GroupResource\RelationManagers\StudentsRelationManager as RelationManagersStudentsRelationManager;
 use App\Models\Group;
@@ -68,6 +69,7 @@ class GroupResource extends Resource
             RelationManagersStudentsRelationManager::class,
             HomeworksRelationManager::class,
             MaterialsRelationManager::class,
+            LessonsRelationManager::class
         ];
     }
 

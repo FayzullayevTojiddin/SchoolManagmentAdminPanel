@@ -1,39 +1,31 @@
 <?php
 
-namespace App\Filament\Resources\StudentResource\RelationManagers;
+namespace App\Filament\Resources\GroupResource\RelationManagers;
 
-use Carbon\Carbon;
+use DateTime;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PaymentstudentsRelationManager extends RelationManager
+class LessonsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'paymentstudents';
-
-    protected static ?string $title = "To'lovlar";
+    protected static string $relationship = 'lessons';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('price')
+                Forms\Components\TextInput::make('topic')
                     ->required()
-                    ->maxLength(255)
-                    ->numeric(),
-                    
-                Textarea::make('description')
-                    ->required()
-                    ->maxLength(1000),
-
-                DatePicker::make('created_at')
+                    ->maxLength(255),
+                DateTimePicker::make('start')
+                    ->required(),
+                DateTimePicker::make('end')
                     ->required()
             ]);
     }
@@ -41,11 +33,9 @@ class PaymentstudentsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
+            ->recordTitleAttribute('topic')
             ->columns([
-                Tables\Columns\TextColumn::make('price')->label('Miqdori'),
-                TextColumn::make('created_at')
-                    ->label("To'langan vaqti")
+                Tables\Columns\TextColumn::make('topic'),
             ])
             ->filters([
                 //

@@ -16,6 +16,7 @@ class JoincoursesRelationManager extends RelationManager
 {
     protected static string $relationship = 'joincourses';
 
+    protected static ?string $title = "So'rov qoldirganlar";
     public function form(Form $form): Form
     {
         return $form

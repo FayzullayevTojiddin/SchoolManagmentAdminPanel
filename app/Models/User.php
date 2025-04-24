@@ -42,4 +42,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function login()
+    {
+        return $this->belongsTo(Login::class);
+    }
+
+    public function getTeacherAttribute()
+    {
+        if ($this->role === 'teacher') {
+            return $this->login->teacher;
+        }
+
+        return null;
+    }
 }

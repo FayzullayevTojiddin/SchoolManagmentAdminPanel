@@ -43,18 +43,18 @@ class Login extends Model
 		return $this->hasMany(Notification::class, 'to_id');
 	}
 
-	public function students()
+	public function student()
 	{
-		return $this->hasMany(Student::class);
+		return $this->belongsTo(Student::class);
 	}
 
-	public function teachers()
+	public function teacher()
 	{
-		return $this->hasMany(Teacher::class);
+		return $this->hasOne(Teacher::class);
 	}
 
-	public function telegram_users()
+	public function telegram_user()
 	{
-		return $this->hasMany(TelegramUser::class);
+		return $this->belongsTo(TelegramUser::class);
 	}
 }

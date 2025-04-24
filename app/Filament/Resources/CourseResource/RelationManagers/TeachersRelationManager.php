@@ -15,6 +15,8 @@ class TeachersRelationManager extends RelationManager
 {
     protected static string $relationship = 'teachers';
 
+    protected static ?string $title = "O'qituvchilar";
+
     public function form(Form $form): Form
     {
         return $form
@@ -30,11 +32,12 @@ class TeachersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('teacher.full_name')
+            ->recordTitleAttribute("O'qituvchi ma'lumotlari")
             ->columns([
-                Tables\Columns\TextColumn::make('teacher.full_name'),
-                TextColumn::make('teacher.subject'),
-                TextColumn::make('teacher.school')
+                Tables\Columns\TextColumn::make('teacher.full_name')->label("To'liq ismi"),
+                TextColumn::make('teacher.subject')->label('Fan'),
+                TextColumn::make('teacher.school')->label('Maktabi'),
+                TextColumn::make('created_at')->label("A'zo bo'lgan vaqti")->date()
             ])
             ->searchable()
             ->filters([
