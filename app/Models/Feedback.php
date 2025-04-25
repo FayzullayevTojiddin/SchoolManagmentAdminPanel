@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Feedback extends Model
 {
+	protected $table = 'feedbacks';
 	protected $casts = [
 		'user_id' => 'int'
 	];
@@ -29,4 +30,9 @@ class Feedback extends Model
 		'user_id',
 		'question'
 	];
+
+	public function telegramuser()
+	{
+		return $this->belongsTo(TelegramUser::class, 'user_id', 'user_id');
+	}
 }

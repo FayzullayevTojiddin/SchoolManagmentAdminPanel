@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('joincourses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->index('joincourse_user_id');
+            $table->bigInteger('user_id');
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
