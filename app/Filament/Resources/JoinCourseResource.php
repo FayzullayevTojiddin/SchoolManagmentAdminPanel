@@ -6,6 +6,8 @@ use App\Filament\Resources\JoinCourseResource\Pages;
 use App\Filament\Resources\JoinCourseResource\RelationManagers;
 use App\Models\JoinCourse;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,7 +34,13 @@ class JoinCourseResource extends Resource
     {
         return $form
             ->schema([
-
+                Select::make('course')->disabled()->relationship('course', 'name'),
+                Section::make('Telegram User')
+                    ->schema([
+                        Select::make('telegram_user.id')->disabled()->relationship('telegram_user', 'full_name')->label('Ism Sharifi'),
+                        Select::make('telegram_user.id')->disabled()->relationship('telegram_user', 'phoneNumber')->label('Telefon raqami'),
+                        Select::make('telegram_user.age')->disabled()->relationship('telegram_user', 'age')->label('Yoshi'),
+                    ])
             ]);
     }
 
@@ -40,7 +48,9 @@ class JoinCourseResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('telegram_user.first_name')
+                TextColumn::make('telegram_user.first_name'),
+                TextColumn::make('created_at')->label('Yuborilgan vaqti'),
+                TextColumn::make('course.name')->label('Kurs')
             ])
             ->filters([
                 //

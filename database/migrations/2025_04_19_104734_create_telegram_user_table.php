@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('username', 100)->nullable();
             $table->string('role', 10);
             $table->foreignId('login_id')->nullable()->constrained()->nullOnDelete();
+            $table->boolean('is_register')->default(false);
+            $table->string('full_name')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('phoneNumber')->nullable();
             $table->timestamps();
         });
     }

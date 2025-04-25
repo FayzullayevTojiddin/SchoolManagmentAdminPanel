@@ -6,6 +6,8 @@ use App\Filament\Resources\FeedbackResource\Pages;
 use App\Filament\Resources\FeedbackResource\RelationManagers;
 use App\Models\Feedback;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -34,7 +36,13 @@ class FeedbackResource extends Resource
     {
         return $form
             ->schema([
-                Textarea::make('question')->disabled()
+                TextInput::make('question')->disabled(),
+                Section::make('Telegram User')
+                    ->schema([
+                        Select::make('telegramuser.id')->disabled()->relationship('telegramuser', 'full_name')->label('Ism Sharifi'),
+                        Select::make('telegramuser.id')->disabled()->relationship('telegramuser', 'phoneNumber')->label('Telefon raqami'),
+                        Select::make('telegramuser.age')->disabled()->relationship('telegramuser', 'age')->label('Yoshi'),
+                    ])
             ]);
     }
 
