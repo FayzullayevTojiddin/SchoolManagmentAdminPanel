@@ -70,7 +70,7 @@ class PaymentStudentResource extends Resource
         return [
             'index' => Pages\ListPaymentStudents::route('/'),
             'create' => Pages\CreatePaymentStudent::route('/create'),
-            // 'edit' => Pages\EditPaymentStudent::route('/{record}/edit'),
+            'edit' => Pages\EditPaymentStudent::route('/{record}/edit'),
         ];
     }
 }

@@ -22,6 +22,8 @@ class CourseResource extends Resource
 
     protected static ?string $navigationLabel = 'Courses';
 
+    protected static ?string $modelLabel = "Kurslar ro'yxati";
+
     public static function form(Form $form): Form
     {
         return $form

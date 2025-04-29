@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CourseResource\RelationManagers;
 
+use App\Filament\Resources\TeacherResource;
 use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -33,6 +34,7 @@ class TeachersRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute("O'qituvchi ma'lumotlari")
+            ->recordUrl(fn ($record) => TeacherResource::getUrl('edit', ['record' => $record->teacher_id]))
             ->columns([
                 Tables\Columns\TextColumn::make('teacher.full_name')->label("To'liq ismi"),
                 TextColumn::make('teacher.subject')->label('Fan'),
